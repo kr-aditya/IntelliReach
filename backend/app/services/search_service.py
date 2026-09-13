@@ -14,7 +14,7 @@ class SearchService:
 
     def __init__(self) -> None:
         self.search = GoogleSerperAPIWrapper(
-            k=5,
+            k=3,
             gl="in",
             hl="en",
         )
