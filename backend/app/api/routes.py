@@ -1,4 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+
+from fastapi import (
+    APIRouter,
+    File,
+    HTTPException,
+    UploadFile,
+)
+
 from pydantic import BaseModel, Field
 
 from app.rag.ingestion import DocumentIngestionService
@@ -31,12 +40,7 @@ class AskRequest(BaseModel):
     )
 
 
-class IngestRequest(BaseModel):
 
-    file_path: str = Field(
-        min_length=1,
-        description="Path to the document to ingest.",
-    )
 
 
 # ============================================================
@@ -56,7 +60,9 @@ def health_check():
 # Company Research
 # ============================================================
 
-@router.post("/research")
+@router.post("/research",
+    summary="Research a company and generate outreach",
+)
 def research_company(
     request: ResearchRequest,
 ):
@@ -101,38 +107,100 @@ def research_company(
 # Document Ingestion
 # ============================================================
 
-@router.post("/ingest")
-def ingest_document(
-    request: IngestRequest,
+@router.post("/ingest",
+    summary="Upload and ingest a company document",
+)
+async def ingest_document(
+    file: UploadFile = File(...)
 ):
 
-    try:
+    allowed_extensions = {
+        ".pdf",
+        ".txt",
+    }
 
-        service = DocumentIngestionService()
+    file_extension = (
+        Path(file.filename or "")
+        .suffix
+        .lower()
+    )
 
-        chunk_count = service.ingest_file(
-            request.file_path
-        )
-
-        return {
-            "status": "success",
-            "message": "Document ingested successfully.",
-            "chunks_stored": chunk_count,
-        }
-
-    except FileNotFoundError as error:
-
-        raise HTTPException(
-            status_code=404,
-            detail=str(error),
-        ) from error
-
-    except ValueError as error:
+    if file_extension not in allowed_extensions:
 
         raise HTTPException(
             status_code=422,
-            detail=str(error),
-        ) from error
+            detail=(
+                "Unsupported file type. "
+                "Only PDF and TXT files are allowed."
+            ),
+        )
+
+
+    try:
+
+        file_bytes = await file.read()
+
+        max_file_size = 10 * 1024 * 1024
+
+        if len(file_bytes) > max_file_size:
+
+         raise HTTPException(
+          status_code=413,
+          detail=(
+            "File is too large. "
+            "Maximum supported size is 10 MB."
+        ),
+    )
+
+        if not file_bytes:
+
+            raise HTTPException(
+                status_code=422,
+                detail="Uploaded file is empty.",
+            )
+
+
+        with NamedTemporaryFile(
+            suffix=file_extension,
+            delete=False,
+        ) as temp_file:
+
+            temp_file.write(
+                file_bytes
+            )
+
+            temp_path = temp_file.name
+
+
+        try:
+
+            service = DocumentIngestionService()
+
+            chunk_count = service.ingest_file(
+                temp_path
+            )
+
+        finally:
+
+            Path(temp_path).unlink(
+                missing_ok=True
+            )
+
+
+        return {
+            "status": "success",
+            "message": (
+                "Document ingested successfully."
+            ),
+            "filename": file.filename,
+            "chunks_stored": chunk_count,
+        }
+
+
+    except HTTPException:
+
+        raise
+
 
     except Exception as error:
 
@@ -148,12 +216,13 @@ def ingest_document(
             ),
         ) from error
 
-
 # ============================================================
 # RAG Question Answering
 # ============================================================
 
-@router.post("/ask")
+@router.post("/ask",
+    summary="Ask the company knowledge base",
+)
 def ask_knowledge_base(
     request: AskRequest,
 ):
