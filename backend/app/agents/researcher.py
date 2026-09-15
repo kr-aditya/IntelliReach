@@ -43,7 +43,7 @@ class CompanyResearch(BaseModel):
 researcher_llm = LLM(
     model="groq/openai/gpt-oss-20b",
     temperature=0.1,
-    max_tokens=500,
+    max_tokens=450,
     reasoning_effort="low",
 )
 
