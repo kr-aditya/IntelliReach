@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const API_URL = "http://localhost:8000/api/v1";
@@ -6,8 +6,28 @@ const API_URL = "http://localhost:8000/api/v1";
 function App() {
   const [companyName, setCompanyName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
   const [researchResult, setResearchResult] = useState(null);
   const [error, setError] = useState("");
+
+useEffect(() => {
+  if (!loading) {
+    setLoadingStep(0);
+    return;
+  }
+
+  const interval = setInterval(() => {
+    setLoadingStep((currentStep) => {
+      if (currentStep < 3) {
+        return currentStep + 1;
+      }
+
+      return currentStep;
+    });
+  }, 12000);
+
+  return () => clearInterval(interval);
+}, [loading]);
 
   const handleResearch = async (event) => {
     event.preventDefault();
@@ -18,9 +38,10 @@ function App() {
       return;
     }
 
-    setLoading(true);
-    setError("");
-    setResearchResult(null);
+     setLoading(true);
+     setLoadingStep(0);
+     setError("");
+     setResearchResult(null);
 
     try {
       const response = await fetch(`${API_URL}/research`, {
@@ -137,38 +158,53 @@ function App() {
         )}
 
         {loading && (
-          <section className="loading-section">
-            <div className="loading-spinner"></div>
+  <section className="loading-section">
+    <div className="loading-spinner"></div>
 
-            <p className="eyebrow">RESEARCH IN PROGRESS</p>
+    <p className="eyebrow">RESEARCH IN PROGRESS</p>
 
-            <h2>
-              Researching <span>{companyName}</span>
-            </h2>
+    <h2>
+      Researching <span>{companyName}</span>
+    </h2>
 
-            <p className="loading-description">
-              IntelliReach is researching the company and generating
-              sales intelligence. This may take up to a minute.
-            </p>
+    <p className="loading-description">
+      IntelliReach is researching the company and generating
+      sales intelligence. This may take up to a minute.
+    </p>
 
-            <div className="loading-card">
-              <div className="loading-row">
-                <span className="loading-check">✓</span>
-                <span>Running company research</span>
-              </div>
+    <div className="loading-card">
 
-              <div className="loading-row">
-                <span className="loading-check">✓</span>
-                <span>Analyzing business opportunities</span>
-              </div>
+      <LoadingStep
+        number="01"
+        label="Searching company information"
+        active={loadingStep >= 0}
+        completed={loadingStep > 0}
+      />
 
-              <div className="loading-row">
-                <span className="loading-pulse"></span>
-                <span>Generating personalized outreach</span>
-              </div>
-            </div>
-          </section>
-        )}
+      <LoadingStep
+        number="02"
+        label="Finding recent developments"
+        active={loadingStep >= 1}
+        completed={loadingStep > 1}
+      />
+
+      <LoadingStep
+        number="03"
+        label="Analyzing business opportunities"
+        active={loadingStep >= 2}
+        completed={loadingStep > 2}
+      />
+
+      <LoadingStep
+        number="04"
+        label="Generating personalized outreach"
+        active={loadingStep >= 3}
+        completed={false}
+      />
+
+    </div>
+  </section>
+)}
 
         {error && !loading && (
           <section className="error-section">
@@ -250,6 +286,30 @@ function App() {
         <span>IntelliReach</span>
         <span>AI-powered sales intelligence</span>
       </footer>
+    </div>
+  );
+}
+function LoadingStep({
+  number,
+  label,
+  active,
+  completed,
+}) {
+  return (
+    <div
+      className={`loading-row ${
+        active ? "is-active" : ""
+      } ${completed ? "is-completed" : ""}`}
+    >
+      <span className="loading-step-number">
+        {number}
+      </span>
+
+      <span className="loading-step-indicator">
+        {completed ? "✓" : active ? "●" : "○"}
+      </span>
+
+      <span>{label}</span>
     </div>
   );
 }
