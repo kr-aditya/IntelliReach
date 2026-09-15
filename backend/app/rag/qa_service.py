@@ -111,6 +111,26 @@ class RAGService:
         documents = retriever.invoke(
             question
         )
+        print(
+            f"\nRAG DEBUG: Retrieved {len(documents)} documents "
+            f"for question: {question}\n"
+        )
+
+        for index, document in enumerate(documents, start=1):
+         print(
+            f"\n--- Retrieved Document {index} ---"
+        )
+
+        print(
+         document.page_content[:500]
+        )
+
+        print(
+          "Metadata:",
+           document.metadata
+        )
+
+        
 
 
         if not documents:
