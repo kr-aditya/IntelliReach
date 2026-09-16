@@ -448,44 +448,6 @@ footer span:first-child {
   text-align: left;
 }
 
-.loading-check {
-  width: 22px;
-  height: 22px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 50%;
-
-  background: rgba(101, 214, 139, 0.12);
-  color: #65d68b;
-
-  font-size: 11px;
-}
-
-.loading-pulse {
-  width: 22px;
-  height: 22px;
-
-  border-radius: 50%;
-
-  background: rgba(167, 139, 250, 0.15);
-  border: 2px solid #a78bfa;
-
-  animation: pulse 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
 .results-section {
   max-width: 1180px;
   margin: 0 auto;
@@ -1137,7 +1099,6 @@ footer span:first-child {
   animation: fadeUp 0.6s ease 0.32s both;
 }
 
-
 /* ---------------------------------------------------------
    HERO BADGE
    --------------------------------------------------------- */
@@ -1154,7 +1115,6 @@ footer span:first-child {
   background: rgba(167, 139, 250, 0.055);
   transform: translateY(-1px);
 }
-
 
 /* ---------------------------------------------------------
    SEARCH INPUT
@@ -1174,6 +1134,10 @@ footer span:first-child {
     0 8px 30px rgba(0, 0, 0, 0.18);
 }
 
+.input-wrapper:focus-within .search-icon {
+  color: #a78bfa;
+}
+
 .input-wrapper input {
   min-width: 0;
 }
@@ -1181,7 +1145,6 @@ footer span:first-child {
 .input-wrapper input:focus::placeholder {
   opacity: 0.45;
 }
-
 
 /* ---------------------------------------------------------
    RESEARCH BUTTON
@@ -1236,7 +1199,6 @@ footer span:first-child {
   box-shadow: none;
 }
 
-
 /* ---------------------------------------------------------
    WORKFLOW CARDS
    --------------------------------------------------------- */
@@ -1272,7 +1234,6 @@ footer span:first-child {
   background: rgba(167, 139, 250, 0.14);
 }
 
-
 /* ---------------------------------------------------------
    LOADING EXPERIENCE
    --------------------------------------------------------- */
@@ -1285,7 +1246,6 @@ footer span:first-child {
   box-shadow:
     0 0 25px rgba(167, 139, 250, 0.12);
 }
-
 
 /* ---------------------------------------------------------
    LOADING CARD
@@ -1337,7 +1297,6 @@ footer span:first-child {
   color: #8fd8a5;
 }
 
-
 /* ---------------------------------------------------------
    LOADING STEP NUMBER
    --------------------------------------------------------- */
@@ -1361,7 +1320,6 @@ footer span:first-child {
 .loading-row.is-completed .loading-step-number {
   color: #81d99d;
 }
-
 
 /* ---------------------------------------------------------
    LOADING STEP INDICATOR
@@ -1396,7 +1354,6 @@ footer span:first-child {
   transform: scale(1.05);
 }
 
-
 /* ---------------------------------------------------------
    ANIMATIONS
    --------------------------------------------------------- */
@@ -1425,7 +1382,6 @@ footer span:first-child {
     transform: translateY(0);
   }
 }
-
 
 /* ---------------------------------------------------------
    MOBILE — RESEARCH EXPERIENCE
@@ -1467,7 +1423,6 @@ footer span:first-child {
   }
 }
 
-
 /* ---------------------------------------------------------
    ACCESSIBILITY
    --------------------------------------------------------- */
@@ -1501,7 +1456,6 @@ footer span:first-child {
    PHASE 5 — POLISH
    CHECKPOINT 2 — RESULTS EXPERIENCE
    ========================================================= */
-
 
 /* ---------------------------------------------------------
    RESULTS HEADER
@@ -1546,7 +1500,6 @@ footer span:first-child {
     0 0 0 4px rgba(129, 217, 157, 0.08);
 }
 
-
 /* ---------------------------------------------------------
    NEW RESEARCH BUTTON
    --------------------------------------------------------- */
@@ -1565,7 +1518,6 @@ footer span:first-child {
 
   background: rgba(167, 139, 250, 0.06);
 }
-
 
 /* ---------------------------------------------------------
    RESULT CARD ENTRANCE
@@ -1611,7 +1563,6 @@ footer span:first-child {
   }
 }
 
-
 /* ---------------------------------------------------------
    CARD SUBTITLE
    --------------------------------------------------------- */
@@ -1625,7 +1576,6 @@ footer span:first-child {
   font-size: 12px;
   line-height: 1.7;
 }
-
 
 /* ---------------------------------------------------------
    PAIN POINTS
@@ -1656,7 +1606,6 @@ footer span:first-child {
 
   letter-spacing: 0.08em;
 }
-
 
 /* ---------------------------------------------------------
    OPPORTUNITY CARD
@@ -1740,7 +1689,6 @@ footer span:first-child {
   line-height: 1.7;
 }
 
-
 /* ---------------------------------------------------------
    OUTREACH
    --------------------------------------------------------- */
@@ -1756,7 +1704,6 @@ footer span:first-child {
 .outreach-header h2 {
   margin-bottom: 0;
 }
-
 
 /* ---------------------------------------------------------
    COPY EMAIL BUTTON
@@ -1808,7 +1755,6 @@ footer span:first-child {
   transform: translateY(0);
 }
 
-
 /* ---------------------------------------------------------
    EMAIL PREVIEW
    --------------------------------------------------------- */
@@ -1857,7 +1803,6 @@ footer span:first-child {
 
   box-shadow: none;
 }
-
 
 /* ---------------------------------------------------------
    TALKING POINTS
@@ -1924,7 +1869,6 @@ footer span:first-child {
   line-height: 1.65;
 }
 
-
 /* ---------------------------------------------------------
    MOBILE RESULTS
    --------------------------------------------------------- */
@@ -1964,7 +1908,6 @@ footer span:first-child {
     transform: none;
   }
 }
-
 
 /* ---------------------------------------------------------
    REDUCED MOTION
@@ -2603,5 +2546,650 @@ footer span:first-child {
 
   .button-spinner {
     animation: none;
+  }
+}
+
+/* =========================================================
+   FINAL UX PASS — RESPONSIVE + MOBILE
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   GLOBAL INTERACTION SAFETY
+   --------------------------------------------------------- */
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.65);
+  outline-offset: 3px;
+}
+
+/* Inputs use their own focus treatment so the field does not get a
+   second browser-style outline inside the focused container. */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Prevent long AI-generated content from breaking layouts */
+
+.result-card,
+.knowledge-card,
+.email-box,
+.answer-box,
+.source-item {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------
+   LARGE DESKTOP
+   --------------------------------------------------------- */
+
+@media (min-width: 1200px) {
+  .hero {
+    padding-top: 120px;
+  }
+
+  .results-section {
+    padding-top: 85px;
+  }
+
+  .knowledge-section {
+    padding-top: 105px;
+  }
+}
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .workflow {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .results-section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .knowledge-section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .workflow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  /* Navbar */
+
+  .navbar {
+    height: 64px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .brand {
+    gap: 9px;
+    font-size: 16px;
+  }
+
+  .brand-mark {
+    width: 31px;
+    height: 31px;
+    border-radius: 8px;
+  }
+
+  /* Hero */
+
+  .hero {
+    width: 100%;
+    padding: 68px 18px 62px;
+  }
+
+  .hero-badge {
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    margin-top: 21px;
+    font-size: clamp(38px, 11vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+
+  .hero-description {
+    max-width: 540px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* Research form */
+
+  .research-form {
+    width: 100%;
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .input-wrapper {
+    width: 100%;
+    height: 54px;
+    min-height: 54px;
+    padding: 0 15px;
+  }
+
+  .input-wrapper input {
+    font-size: 15px;
+  }
+
+  .research-button {
+    width: 100%;
+    height: 54px;
+    min-height: 54px;
+    justify-content: center;
+    padding: 0 18px;
+  }
+
+  .form-hint {
+    line-height: 1.6;
+  }
+
+  /* Workflow */
+
+  .workflow {
+    padding: 58px 18px 70px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: 28px;
+  }
+
+  .workflow-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .workflow-card {
+    min-height: auto;
+    padding: 23px;
+  }
+
+  .workflow-card .step-icon {
+    margin-bottom: 22px;
+  }
+
+  /* Loading */
+
+  .loading-section {
+    width: 100%;
+    padding: 78px 18px;
+  }
+
+  .loading-section h2 {
+    font-size: clamp(30px, 8vw, 36px);
+    line-height: 1.1;
+  }
+
+  .loading-description {
+    font-size: 13px;
+  }
+
+  .loading-card {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .loading-row {
+    gap: 9px;
+    padding: 13px 6px;
+    font-size: 12px;
+  }
+
+  .loading-step-number {
+    width: 22px;
+  }
+
+  .loading-step-indicator {
+    width: 16px;
+  }
+
+  /* Results */
+
+  .results-section {
+    width: 100%;
+    padding: 58px 18px 75px;
+  }
+
+  .results-header {
+    margin-bottom: 28px;
+    gap: 18px;
+  }
+
+  .results-header h1 {
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 1.05;
+  }
+
+  .results-header > div > p:last-child {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .results-header .secondary-button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .result-card {
+    padding: 22px;
+    border-radius: 15px;
+  }
+
+  .result-card h2 {
+    font-size: 20px;
+  }
+
+  .result-card p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .result-card li {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .overview-card {
+    grid-row: auto;
+  }
+
+  .pain-points-card,
+  .outreach-card {
+    grid-column: auto;
+  }
+
+  .pain-point {
+    gap: 12px;
+    padding: 14px 0;
+  }
+
+  .pain-point:hover {
+    transform: none;
+  }
+
+  .opportunity-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .opportunity-badge {
+    align-self: flex-start;
+  }
+
+  .outreach-header {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .copy-email-button {
+    width: 100%;
+    min-height: 40px;
+  }
+
+  .email-preview {
+    margin-top: 15px;
+  }
+
+  .email-preview .email-box {
+    padding: 18px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .talking-points {
+    margin-top: 22px;
+  }
+
+  .talking-points li {
+    gap: 9px;
+    padding: 10px;
+  }
+
+  /* Knowledge Base */
+
+  .knowledge-section {
+    width: 100%;
+    padding: 65px 18px 70px;
+  }
+
+  .knowledge-heading {
+    margin-bottom: 30px;
+  }
+
+  .knowledge-heading-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 17px;
+  }
+
+  .knowledge-heading h2 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+
+  .knowledge-heading > div > div > p:last-child {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .knowledge-status {
+    align-self: flex-start;
+  }
+
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .knowledge-card {
+    padding: 21px;
+    border-radius: 15px;
+  }
+
+  .knowledge-card-header {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .knowledge-card-header h3 {
+    font-size: 19px;
+  }
+
+  .knowledge-card-description {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .knowledge-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    font-size: 15px;
+  }
+
+  .upload-box {
+    min-height: 185px;
+    padding: 24px 15px;
+  }
+
+  .upload-box strong {
+    max-width: 82%;
+    font-size: 13px;
+  }
+
+  .upload-button,
+  .ask-button {
+    min-height: 48px;
+  }
+
+  .question-input {
+    min-height: 140px;
+    font-size: 13px;
+  }
+
+  .question-footer {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ask-button {
+    width: 100%;
+  }
+
+  .question-loading {
+    max-width: calc(100% - 16px);
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .answer-box {
+    padding: 17px;
+  }
+
+  .answer-text {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .source-item {
+    gap: 9px;
+    padding: 9px;
+  }
+
+  /* Error */
+
+  .error-section {
+    padding: 90px 18px;
+  }
+
+  .error-section h2 {
+    font-size: 28px;
+  }
+
+  /* Footer */
+
+  footer {
+    padding: 20px 18px;
+    gap: 12px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------------------------------------------------------
+   SMALL MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 420px) {
+  .hero {
+    padding-top: 55px;
+  }
+
+  .hero h1 {
+    font-size: 37px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+  }
+
+  .research-button {
+    font-size: 13px;
+  }
+
+  .loading-section h2 {
+    font-size: 30px;
+  }
+
+  .results-header h1 {
+    font-size: 34px;
+  }
+
+  .result-card {
+    padding: 19px;
+  }
+
+  .result-card h2 {
+    font-size: 19px;
+  }
+
+  .knowledge-card {
+    padding: 18px;
+  }
+
+  .knowledge-heading h2 {
+    font-size: 26px;
+  }
+
+  .upload-box {
+    min-height: 175px;
+  }
+
+  .upload-box small {
+    display: none;
+  }
+
+  .email-preview .email-box {
+    padding: 15px;
+    font-size: 11px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------
+   VERY SMALL DEVICES
+   --------------------------------------------------------- */
+
+@media (max-width: 360px) {
+  .navbar {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .brand-mark {
+    width: 29px;
+    height: 29px;
+  }
+
+  .hero,
+  .workflow,
+  .results-section,
+  .knowledge-section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-badge {
+    padding: 6px 10px;
+  }
+
+  .result-card,
+  .knowledge-card {
+    padding: 16px;
+  }
+}
+
+/* ---------------------------------------------------------
+   TOUCH DEVICES
+   --------------------------------------------------------- */
+
+@media (hover: none) {
+  .hero-badge:hover,
+  .workflow-card:hover,
+  .knowledge-card:hover,
+  .upload-box:hover,
+  .source-item:hover,
+  .talking-points li:hover {
+    transform: none;
+  }
+
+  .research-button:hover:not(:disabled),
+  .secondary-button:hover,
+  .copy-email-button:hover,
+  .upload-button:hover:not(:disabled),
+  .ask-button:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   FINAL REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .hero-badge,
+  .hero h1,
+  .hero-description,
+  .research-form,
+  .form-hint,
+  .loading-section,
+  .loading-card,
+  .loading-row.is-active .loading-step-indicator,
+  .results-title-group,
+  .results-grid .result-card,
+  .knowledge-card,
+  .answer-box {
+    animation: none !important;
+  }
+
+  .research-button,
+  .workflow-card,
+  .workflow-card .step-icon,
+  .hero-badge,
+  .knowledge-card,
+  .knowledge-icon,
+  .upload-box,
+  .upload-button,
+  .ask-button,
+  .secondary-button,
+  .copy-email-button,
+  .pain-point,
+  .source-item,
+  .talking-points li {
+    transition: none !important;
   }
 }
