@@ -1496,3 +1496,496 @@ footer span:first-child {
     transform: none;
   }
 }
+
+/* =========================================================
+   PHASE 5 — POLISH
+   CHECKPOINT 2 — RESULTS EXPERIENCE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   RESULTS HEADER
+   --------------------------------------------------------- */
+
+.results-title-group {
+  animation: fadeUp 0.55s ease both;
+}
+
+.results-title-group h1 {
+  margin-bottom: 8px;
+}
+
+.results-title-group > p {
+  color: #7b7d87;
+}
+
+.results-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 14px;
+
+  color: #8fd8a5;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.results-status-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #81d99d;
+
+  box-shadow:
+    0 0 0 4px rgba(129, 217, 157, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   NEW RESEARCH BUTTON
+   --------------------------------------------------------- */
+
+.results-header .secondary-button {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.results-header .secondary-button:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(167, 139, 250, 0.3);
+
+  background: rgba(167, 139, 250, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   RESULT CARD ENTRANCE
+   --------------------------------------------------------- */
+
+.results-grid .result-card {
+  animation: resultCardIn 0.55s ease both;
+}
+
+.results-grid .result-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.results-grid .result-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.results-grid .result-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.results-grid .result-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.results-grid .result-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.results-grid .result-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+@keyframes resultCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   CARD SUBTITLE
+   --------------------------------------------------------- */
+
+.card-subtitle {
+  margin-top: -2px;
+  margin-bottom: 20px;
+
+  color: #777984;
+
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+
+/* ---------------------------------------------------------
+   PAIN POINTS
+   --------------------------------------------------------- */
+
+.pain-point {
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.pain-point:hover {
+  transform: translateX(4px);
+
+  background: rgba(167, 139, 250, 0.035);
+
+  border-color: rgba(167, 139, 250, 0.16);
+}
+
+.pain-point-number {
+  flex-shrink: 0;
+
+  color: #a78bfa;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* ---------------------------------------------------------
+   OPPORTUNITY CARD
+   --------------------------------------------------------- */
+
+.opportunity-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.opportunity-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(167, 139, 250, 0.6),
+      transparent
+    );
+}
+
+.opportunity-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+}
+
+.opportunity-badge {
+  flex-shrink: 0;
+
+  padding: 5px 8px;
+
+  border: 1px solid rgba(167, 139, 250, 0.16);
+  border-radius: 6px;
+
+  background: rgba(167, 139, 250, 0.05);
+
+  color: #a78bfa;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+}
+
+.business-value {
+  margin-top: 22px;
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.business-value > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #696b75;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+}
+
+.business-value p {
+  color: #b8bac3;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* ---------------------------------------------------------
+   OUTREACH
+   --------------------------------------------------------- */
+
+.outreach-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.outreach-header h2 {
+  margin-bottom: 0;
+}
+
+
+/* ---------------------------------------------------------
+   COPY EMAIL BUTTON
+   --------------------------------------------------------- */
+
+.copy-email-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  flex-shrink: 0;
+
+  min-height: 34px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: #a9abb5;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.copy-email-button:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(167, 139, 250, 0.25);
+
+  background: rgba(167, 139, 250, 0.06);
+
+  color: #d0c5f4;
+}
+
+.copy-email-button:active {
+  transform: translateY(0);
+}
+
+
+/* ---------------------------------------------------------
+   EMAIL PREVIEW
+   --------------------------------------------------------- */
+
+.email-preview {
+  margin-top: 20px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.email-preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  height: 30px;
+
+  padding: 0 12px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.email-preview-bar span {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #555762;
+}
+
+.email-preview .email-box {
+  margin: 0;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+}
+
+
+/* ---------------------------------------------------------
+   TALKING POINTS
+   --------------------------------------------------------- */
+
+.talking-points {
+  margin-top: 26px;
+}
+
+.talking-points ol {
+  display: grid;
+
+  gap: 10px;
+
+  margin: 14px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.talking-points li {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 11px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.045);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.talking-points li:hover {
+  border-color: rgba(167, 139, 250, 0.12);
+
+  background: rgba(167, 139, 250, 0.025);
+}
+
+.talking-points li > span {
+  flex-shrink: 0;
+
+  padding-top: 1px;
+
+  color: #a78bfa;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.talking-points li p {
+  margin: 0;
+
+  color: #a8aab4;
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE RESULTS
+   --------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .results-header {
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .results-header .secondary-button {
+    width: 100%;
+  }
+
+  .opportunity-heading {
+    align-items: flex-start;
+  }
+
+  .outreach-header {
+    flex-direction: column;
+  }
+
+  .copy-email-button {
+    width: 100%;
+  }
+
+  .email-preview {
+    margin-top: 16px;
+  }
+
+  .talking-points {
+    margin-top: 22px;
+  }
+
+  .results-grid .result-card:hover {
+    transform: none;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .results-title-group,
+  .results-grid .result-card {
+    animation: none;
+  }
+
+  .results-header .secondary-button,
+  .pain-point,
+  .copy-email-button,
+  .talking-points li {
+    transition: none;
+  }
+
+  .results-header .secondary-button:hover,
+  .pain-point:hover,
+  .copy-email-button:hover {
+    transform: none;
+  }
+}
