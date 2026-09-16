@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:8000/api/v1";
+
+
+const API_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
 function App() {
   const [companyName, setCompanyName] = useState("");
@@ -44,7 +46,7 @@ useEffect(() => {
      setResearchResult(null);
 
     try {
-      const response = await fetch(`${API_URL}/research`, {
+      const response = await fetch(`${API_URL}/api/v1/research`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -527,7 +529,7 @@ function KnowledgeBase() {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch(`${API_URL}/ingest`, {
+      const response = await fetch(`${API_URL}/api/v1/ingest`, {
         method: "POST",
         body: formData,
       });
@@ -576,7 +578,7 @@ function KnowledgeBase() {
     setAnswer(null);
 
     try {
-      const response = await fetch(`${API_URL}/ask`, {
+      const response = await fetch(`${API_URL}/api/v1/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
