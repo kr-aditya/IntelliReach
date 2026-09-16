@@ -82,9 +82,7 @@ function KnowledgeBase() {
     setUploadError("");
 
     try {
-      const data = await uploadDocument(
-        selectedFile
-      );
+      const data = await uploadDocument(selectedFile);
 
       setUploadMessage(
         `${data.filename} uploaded successfully. ${data.chunks_stored} knowledge chunks stored.`
@@ -124,9 +122,7 @@ function KnowledgeBase() {
     setAnswer(null);
 
     try {
-      const result = await askQuestion(
-        trimmedQuestion
-      );
+      const result = await askQuestion(trimmedQuestion);
 
       setAnswer(result);
     } catch (requestError) {
@@ -147,19 +143,28 @@ function KnowledgeBase() {
   return (
     <section className="knowledge-section">
       <div className="knowledge-heading">
-        <p className="eyebrow">
-          COMPANY KNOWLEDGE BASE
-        </p>
+        <div className="knowledge-heading-top">
+          <div>
+            <p className="eyebrow">
+              COMPANY KNOWLEDGE BASE
+            </p>
 
-        <h2>
-          Ask questions about your documents
-        </h2>
+            <h2>
+              Ask questions about your documents
+            </h2>
 
-        <p>
-          Upload company documents to build a
-          searchable knowledge base, then ask
-          questions using grounded AI answers.
-        </p>
+            <p>
+              Upload company documents to build a
+              searchable knowledge base, then ask
+              questions using grounded AI answers.
+            </p>
+          </div>
+
+          <div className="knowledge-status">
+            <span className="knowledge-status-dot"></span>
+            RAG ENABLED
+          </div>
+        </div>
       </div>
 
       <div className="knowledge-grid">
@@ -173,6 +178,11 @@ function KnowledgeBase() {
               </div>
 
               <h3>Add company knowledge</h3>
+
+              <p className="knowledge-card-description">
+                Upload internal documents to make them
+                searchable by the AI.
+              </p>
             </div>
 
             <span className="knowledge-icon">
@@ -180,7 +190,11 @@ function KnowledgeBase() {
             </span>
           </div>
 
-          <label className="upload-box">
+          <label
+            className={`upload-box ${
+              selectedFile ? "has-file" : ""
+            }`}
+          >
             <input
               ref={fileInputRef}
               type="file"
@@ -189,7 +203,7 @@ function KnowledgeBase() {
             />
 
             <span className="upload-icon">
-              ↑
+              {selectedFile ? "✓" : "↑"}
             </span>
 
             <strong>
@@ -204,9 +218,15 @@ function KnowledgeBase() {
                     selectedFile.size /
                     1024 /
                     1024
-                  ).toFixed(2)} MB`
+                  ).toFixed(2)} MB selected`
                 : "Maximum file size: 10 MB"}
             </span>
+
+            {!selectedFile && (
+              <small>
+                Click anywhere in this area to browse
+              </small>
+            )}
           </label>
 
           <button
@@ -214,20 +234,38 @@ function KnowledgeBase() {
             onClick={handleUpload}
             disabled={!selectedFile || uploading}
           >
-            {uploading
-              ? "Uploading..."
-              : "Upload Document"}
+            {uploading ? (
+              <>
+                <span className="button-spinner"></span>
+                Processing document...
+              </>
+            ) : (
+              <>
+                Upload Document
+                <span>→</span>
+              </>
+            )}
           </button>
 
           {uploadMessage && (
             <div className="success-message">
-              ✓ {uploadMessage}
+              <span className="message-icon">✓</span>
+
+              <div>
+                <strong>Document processed</strong>
+                <p>{uploadMessage}</p>
+              </div>
             </div>
           )}
 
           {uploadError && (
             <div className="upload-error">
-              {uploadError}
+              <span className="message-icon">!</span>
+
+              <div>
+                <strong>Upload failed</strong>
+                <p>{uploadError}</p>
+              </div>
             </div>
           )}
         </article>
@@ -241,6 +279,11 @@ function KnowledgeBase() {
               </div>
 
               <h3>Ask your documents</h3>
+
+              <p className="knowledge-card-description">
+                Get answers grounded in the documents
+                stored in your knowledge base.
+              </p>
             </div>
 
             <span className="knowledge-icon">
@@ -249,19 +292,28 @@ function KnowledgeBase() {
           </div>
 
           <form onSubmit={handleAsk}>
-            <textarea
-              className="question-input"
-              placeholder="What does this company do?"
-              value={question}
-              onChange={(event) =>
-                setQuestion(event.target.value)
-              }
-              maxLength={500}
-              disabled={asking}
-            />
+            <div className="question-wrapper">
+              <textarea
+                className="question-input"
+                placeholder="What does this company do?"
+                value={question}
+                onChange={(event) =>
+                  setQuestion(event.target.value)
+                }
+                maxLength={500}
+                disabled={asking}
+              />
+
+              {asking && (
+                <div className="question-loading">
+                  <span className="button-spinner"></span>
+                  Searching knowledge base...
+                </div>
+              )}
+            </div>
 
             <div className="question-footer">
-              <span>
+              <span className="character-count">
                 {question.length}/500
               </span>
 
@@ -283,34 +335,67 @@ function KnowledgeBase() {
 
           {askError && (
             <div className="upload-error">
-              {askError}
+              <span className="message-icon">!</span>
+
+              <div>
+                <strong>Unable to answer</strong>
+                <p>{askError}</p>
+              </div>
             </div>
           )}
 
           {answer && (
             <div className="answer-box">
-              <div className="answer-label">
-                ANSWER
+              <div className="answer-header">
+                <div>
+                  <div className="answer-label">
+                    GROUNDED ANSWER
+                  </div>
+
+                  <span className="answer-badge">
+                    RAG
+                  </span>
+                </div>
               </div>
 
-              <p>{answer.answer}</p>
+              <p className="answer-text">
+                {answer.answer}
+              </p>
 
               {answer.sources?.length > 0 && (
                 <div className="sources">
-                  <div className="answer-label">
-                    SOURCES
+                  <div className="sources-header">
+                    <div className="answer-label">
+                      SOURCES
+                    </div>
+
+                    <span>
+                      {answer.sources.length}{" "}
+                      {answer.sources.length === 1
+                        ? "source"
+                        : "sources"}
+                    </span>
                   </div>
 
-                  {answer.sources.map(
-                    (source, index) => (
-                      <div
-                        className="source-item"
-                        key={index}
-                      >
-                        {source}
-                      </div>
-                    )
-                  )}
+                  <div className="source-list">
+                    {answer.sources.map(
+                      (source, index) => (
+                        <div
+                          className="source-item"
+                          key={index}
+                        >
+                          <span>
+                            {String(index + 1).padStart(
+                              2,
+                              "0"
+                            )}
+                          </span>
+
+                          <p>{source}</p>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
               )}
             </div>
