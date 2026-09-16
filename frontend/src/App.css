@@ -1110,10 +1110,192 @@ footer span:first-child {
 
 /* =========================================================
    PHASE 5 — POLISH
+   CHECKPOINT 1 — RESEARCH EXPERIENCE
    ========================================================= */
 
-.loading-card {
+/* ---------------------------------------------------------
+   HERO ENTRANCE
+   --------------------------------------------------------- */
+
+.hero-badge {
   animation: fadeUp 0.5s ease both;
+}
+
+.hero h1 {
+  animation: fadeUp 0.6s ease 0.08s both;
+}
+
+.hero-description {
+  animation: fadeUp 0.6s ease 0.16s both;
+}
+
+.research-form {
+  animation: fadeUp 0.6s ease 0.24s both;
+}
+
+.form-hint {
+  animation: fadeUp 0.6s ease 0.32s both;
+}
+
+
+/* ---------------------------------------------------------
+   HERO BADGE
+   --------------------------------------------------------- */
+
+.hero-badge {
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.hero-badge:hover {
+  border-color: rgba(167, 139, 250, 0.25);
+  background: rgba(167, 139, 250, 0.055);
+  transform: translateY(-1px);
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH INPUT
+   --------------------------------------------------------- */
+
+.input-wrapper {
+  box-shadow:
+    0 0 0 0 rgba(167, 139, 250, 0);
+}
+
+.input-wrapper:focus-within {
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 0 0 3px rgba(167, 139, 250, 0.08),
+    0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.input-wrapper input {
+  min-width: 0;
+}
+
+.input-wrapper input:focus::placeholder {
+  opacity: 0.45;
+}
+
+
+/* ---------------------------------------------------------
+   RESEARCH BUTTON
+   --------------------------------------------------------- */
+
+.research-button {
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.research-button::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+
+  transform: skewX(-18deg);
+
+  transition: left 0.6s ease;
+}
+
+.research-button:hover:not(:disabled)::after {
+  left: 140%;
+}
+
+.research-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.research-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.research-button:disabled {
+  box-shadow: none;
+}
+
+
+/* ---------------------------------------------------------
+   WORKFLOW CARDS
+   --------------------------------------------------------- */
+
+.workflow-card {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.workflow-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(167, 139, 250, 0.2);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.workflow-card .step-icon {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.workflow-card:hover .step-icon {
+  transform: scale(1.05);
+
+  background: rgba(167, 139, 250, 0.14);
+}
+
+
+/* ---------------------------------------------------------
+   LOADING EXPERIENCE
+   --------------------------------------------------------- */
+
+.loading-section {
+  animation: fadeUp 0.5s ease both;
+}
+
+.loading-spinner {
+  box-shadow:
+    0 0 25px rgba(167, 139, 250, 0.12);
+}
+
+
+/* ---------------------------------------------------------
+   LOADING CARD
+   --------------------------------------------------------- */
+
+.loading-card {
+  animation: fadeUp 0.5s ease 0.1s both;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.16);
 }
 
 .loading-row {
@@ -1121,7 +1303,7 @@ footer span:first-child {
   align-items: center;
   gap: 12px;
 
-  padding: 14px 0;
+  padding: 14px 8px;
 
   color: #555762;
   font-size: 13px;
@@ -1130,7 +1312,8 @@ footer span:first-child {
 
   transition:
     color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    background 0.3s ease;
 }
 
 .loading-row:last-child {
@@ -1138,45 +1321,87 @@ footer span:first-child {
 }
 
 .loading-row.is-active {
-  color: #c9c9d0;
+  color: #d0d0d7;
+
   transform: translateX(3px);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(167, 139, 250, 0.045),
+      transparent
+    );
 }
 
 .loading-row.is-completed {
   color: #8fd8a5;
 }
 
+
+/* ---------------------------------------------------------
+   LOADING STEP NUMBER
+   --------------------------------------------------------- */
+
 .loading-step-number {
   width: 24px;
+  flex-shrink: 0;
 
   color: #555762;
 
   font-size: 9px;
   font-weight: 700;
+
   letter-spacing: 0.08em;
 }
 
+.loading-row.is-active .loading-step-number {
+  color: #a78bfa;
+}
+
+.loading-row.is-completed .loading-step-number {
+  color: #81d99d;
+}
+
+
+/* ---------------------------------------------------------
+   LOADING STEP INDICATOR
+   --------------------------------------------------------- */
+
 .loading-step-indicator {
   width: 18px;
+  flex-shrink: 0;
 
   color: #686a75;
 
   font-size: 11px;
 
   text-align: center;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .loading-row.is-active .loading-step-indicator {
   color: #a78bfa;
-  animation: pulse 1.5s ease-in-out infinite;
+
+  animation: loadingPulse 1.5s ease-in-out infinite;
 }
 
 .loading-row.is-completed .loading-step-indicator {
   color: #81d99d;
+
   animation: none;
+
+  transform: scale(1.05);
 }
 
-@keyframes pulse {
+
+/* ---------------------------------------------------------
+   ANIMATIONS
+   --------------------------------------------------------- */
+
+@keyframes loadingPulse {
   0%,
   100% {
     opacity: 0.4;
@@ -1201,94 +1426,35 @@ footer span:first-child {
   }
 }
 
-.results-section {
-  animation: fadeUp 0.6s ease both;
-}
 
-.result-card {
-  animation: fadeUp 0.55s ease both;
-}
-
-.result-card:nth-child(2) {
-  animation-delay: 0.05s;
-}
-
-.result-card:nth-child(3) {
-  animation-delay: 0.1s;
-}
-
-.result-card:nth-child(4) {
-  animation-delay: 0.15s;
-}
-
-.result-card:nth-child(5) {
-  animation-delay: 0.2s;
-}
-
-.result-card:nth-child(6) {
-  animation-delay: 0.25s;
-}
+/* ---------------------------------------------------------
+   MOBILE — RESEARCH EXPERIENCE
+   --------------------------------------------------------- */
 
 @media (max-width: 760px) {
-  .navbar {
-    padding: 18px;
-  }
-
-  .nav-status {
-    display: none;
-  }
-
-  .hero {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .hero h1 {
-    font-size: clamp(38px, 11vw, 58px);
-    line-height: 0.98;
-  }
-
-  .hero-description {
-    font-size: 13px;
+  .hero-badge {
+    font-size: 11px;
   }
 
   .research-form {
-    flex-direction: column;
+    gap: 10px;
   }
 
-  .input-wrapper,
-  .research-button {
-    width: 100%;
+  .input-wrapper {
+    min-height: 56px;
   }
 
   .research-button {
     min-height: 54px;
   }
 
-  .results-section {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .results-header {
-    gap: 20px;
-  }
-
-  .results-header h1 {
-    font-size: 38px;
-  }
-
-  .results-header .secondary-button {
-    width: 100%;
+  .workflow-card:hover {
+    transform: none;
   }
 
   .loading-section {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .loading-section h2 {
-    font-size: 34px;
+    padding-top: 85px;
+    padding-bottom: 85px;
   }
 
   .loading-card {
@@ -1296,10 +1462,37 @@ footer span:first-child {
   }
 
   .loading-row {
+    padding: 14px 4px;
     font-size: 12px;
   }
+}
 
-  .knowledge-heading h2 {
-    font-size: 28px;
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge,
+  .hero h1,
+  .hero-description,
+  .research-form,
+  .form-hint,
+  .loading-section,
+  .loading-card,
+  .loading-row.is-active .loading-step-indicator {
+    animation: none;
+  }
+
+  .research-button,
+  .workflow-card,
+  .workflow-card .step-icon,
+  .hero-badge {
+    transition: none;
+  }
+
+  .research-button:hover:not(:disabled),
+  .workflow-card:hover {
+    transform: none;
   }
 }
