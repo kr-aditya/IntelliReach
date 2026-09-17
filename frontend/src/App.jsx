@@ -30,7 +30,7 @@ function App() {
 
         return currentStep;
       });
-    }, 12000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [loading]);
